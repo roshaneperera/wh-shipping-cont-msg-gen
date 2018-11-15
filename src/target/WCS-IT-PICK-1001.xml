@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='US-ASCII'?>
+<ScaleEvent generatedAt="2018-11-15T03:43:25" id="c4c104bc-b26f-4fa5-962d-3441355ab85a" source="2017">
+            <ShippingContainer id="0000WCS-IT-PICK-1001">
+                <PickingWave>
+                    <Name>3B West</Name>
+                    <LaunchNo>67</LaunchNo>
+                </PickingWave>
+                <Shipment>
+                    <ShipmentId>3IOWK1QIAHNQGDB4-1</ShipmentId>
+                    <Route>C01A</Route>
+                    <ShippingBatch>102</ShippingBatch>
+                    <Zone>Central</Zone>
+                </Shipment>
+                <Order>
+                    <ErpOrderNumber>512190933</ErpOrderNumber>
+                </Order>
+                <Priority>6</Priority>
+                <CaseType>SplitCase</CaseType>
+                <ContainerType>IP</ContainerType>
+                <Chamber>Dry</Chamber>
+                <QcStatus>true</QcStatus>
+                <WorkUnit instructionCount="2">
+                <WorkInstruction id="3689">
+                    <Item>7281</Item>
+                    <UOM>EA</UOM>
+                    <Quantity>1</Quantity>
+                    <Lot>60706457</Lot>
+                    <Location>WZY-B-001-A-07</Location>
+                    <WorkZone>Work 25C Bulk Pick</WorkZone>
+                    <PickInstruction>Handle with utmost care</PickInstruction>
+                    <ErpOrderLineNum>1</ErpOrderLineNum>
+                    <InternalContainerNum>1294739</InternalContainerNum>
+                    <CatchWeightReqd>N</CatchWeightReqd>
+                </WorkInstruction><WorkInstruction id="1224">
+                    <Item>7281</Item>
+                    <UOM>EA</UOM>
+                    <Quantity>3</Quantity>
+                    <Lot>60706457</Lot>
+                    <Location>WZY-B-001-A-07</Location>
+                    <WorkZone>Work 25C Bulk Pick</WorkZone>
+                    <PickInstruction>Handle with utmost care</PickInstruction>
+                    <ErpOrderLineNum>1</ErpOrderLineNum>
+                    <InternalContainerNum>1294739</InternalContainerNum>
+                    <CatchWeightReqd>N</CatchWeightReqd>
+                </WorkInstruction></WorkUnit>
+            </ShippingContainer>
+        </ScaleEvent>
