@@ -3,22 +3,11 @@ import csv
 import os
 import shutil
 import xml.etree.ElementTree as ET
-
+from util import BgColors
 from shipping_container_msg_builder import ShippingContainerRequestBuilder
 
 output_dir = './target/%s'
 file_name_prefix = "%s.xml"
-
-
-class BgColors:
-    HEADER = '\033[95m'
-    OKBLUE = '\033[94m'
-    OKGREEN = '\033[92m'
-    WARNING = '\033[93m'
-    FAIL = '\033[91m'
-    ENDC = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
 
 
 def create_stuff():
