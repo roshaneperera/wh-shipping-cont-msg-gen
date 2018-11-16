@@ -2,6 +2,7 @@ import base64
 import gzip
 import http.client
 import json
+import ssl
 
 from util import BgColors
 
@@ -66,9 +67,14 @@ class RabbitClient:
 
     def publish_message(self, routing_key, message_body):
         msg = ExchangeMsg(self.exchange_name).set_routing_key(routing_key).set_payload(message_body).build()
-        conn = http.client.HTTPConnection(self.host, self.port)
+        if self.port == 443:
+            conn = http.client.HTTPSConnection(self.host, self.port, context=ssl._create_unverified_context())
+        else:
+            conn = http.client.HTTPConnection(self.host, self.port)
+        conn.set_debuglevel(10)
         json_header['Authorization'] = self.get_auth_header(self.user_name, self.password)
         conn.request('POST', self.build_publish_url(), msg, json_header)
+
         res = conn.getresponse()
         if res.code == 200:
             print(BgColors.BOLD + message_body + BgColors.ENDC)
@@ -76,6 +82,9 @@ class RabbitClient:
         else:
             print('>>>', BgColors.BOLD, BgColors.FAIL, res.read().decode('utf-8'), BgColors.ENDC)
 
-# if __name__ == '__main__':
-#     client = RabbitClient("localhost", 15672, 'item-master-exchange-item-updated', 'guest', 'guest')
-#     client.publish_message('item-master-wh-item-data', 'hello world')
+
+if __name__ == '__main__':
+    # client = RabbitClient("localhost", 80, 'wh-im-upload-exchange', 'guest', 'guest')
+    # TODO uncomment to publish to alpha env
+    client = RabbitClient("1.queue.service.redmart", 80, 'wh-im-upload-exchange', 'guest', 'guest')
+    client.publish_message('wh-im-upload-queue', 'testing message 1')

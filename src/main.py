@@ -58,7 +58,7 @@ if __name__ == '__main__':
     initialize()
     args = parser.parse_args()
     fileLocation = args.location[0]
-    print('loading data from ', BgColors.UNDERLINE + BgColors.BOLD, fileLocation, BgColors.ENDC)
+    print('loading data from ', BgColors.UNDERLINE + BgColors.BOLD, fileLocation, BgColors.ENDC)Å
     # msg_type = ContainerMsgType.SOPT
     msg_type = ContainerMsgType.MOPT
     generated_msg = generate_shipping_container_msgs(load_csv_data(fileLocation), msg_type)
