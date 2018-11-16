@@ -5,6 +5,7 @@ import shutil
 import xml.etree.ElementTree as ET
 from util import BgColors, ContainerMsgType
 from shipping_container_msg_builder import ShippingContainerRequestBuilder
+from rabbit_client import RabbitClient
 
 output_dir = './target/%s'
 file_name_prefix = "%s.xml"
@@ -46,7 +47,8 @@ def generate_shipping_container_msgs(data_list, msg_type):
         destination_file = output_dir % file_name
         ET.ElementTree(element) \
             .write(os.path.abspath(destination_file), encoding="unicode", xml_declaration=True, method="xml")
-        print(BgColors.BOLD, BgColors.OKGREEN, "✓", file_name, BgColors.ENDC)
+        print(BgColors.BOLD, BgColors.OKGREEN, 'Generated', "✓", file_name, BgColors.ENDC)
+        return ET.tostring(element, "utf-8", "xml").decode("utf-8")
 
 
 parser = argparse.ArgumentParser(description="generate shippingContainer upload message")
@@ -59,6 +61,8 @@ if __name__ == '__main__':
     print('loading data from ', BgColors.UNDERLINE + BgColors.BOLD, fileLocation, BgColors.ENDC)
     # msg_type = ContainerMsgType.SOPT
     msg_type = ContainerMsgType.MOPT
-    generate_shipping_container_msgs(load_csv_data(fileLocation), msg_type)
+    generated_msg = generate_shipping_container_msgs(load_csv_data(fileLocation), msg_type)
 
-# TODO MOPT msg builder
+    client = RabbitClient("localhost", 15672, 'item-master-exchange-item-updated', 'guest', 'guest')
+    # un-comment to publish the message to the queue
+    client.publish_message('item-master-wh-item-data', generated_msg)

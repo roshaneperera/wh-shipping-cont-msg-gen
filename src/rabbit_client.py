@@ -72,11 +72,10 @@ class RabbitClient:
         res = conn.getresponse()
         if res.code == 200:
             print(BgColors.BOLD + message_body + BgColors.ENDC)
-            print(BgColors.BOLD + BgColors.OKGREEN, gzip.decompress(res.read()).decode('utf-8'), BgColors.ENDC)
+            print('>>>', BgColors.BOLD + BgColors.OKGREEN, gzip.decompress(res.read()).decode('utf-8'), BgColors.ENDC)
         else:
-            print(BgColors.BOLD, BgColors.FAIL, res.read().decode('utf-8'), BgColors.ENDC)
+            print('>>>', BgColors.BOLD, BgColors.FAIL, res.read().decode('utf-8'), BgColors.ENDC)
 
-
-if __name__ == '__main__':
-    client = RabbitClient("localhost", 15672, 'item-master-exchange-item-updated', 'guest', 'guest')
-    client.publish_message('item-master-wh-item-data', 'hello world')
+# if __name__ == '__main__':
+#     client = RabbitClient("localhost", 15672, 'item-master-exchange-item-updated', 'guest', 'guest')
+#     client.publish_message('item-master-wh-item-data', 'hello world')
