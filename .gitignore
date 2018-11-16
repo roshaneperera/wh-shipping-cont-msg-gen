@@ -1,5 +1,6 @@
 .idea
 *.iml
 **__pycache__**
-./target
-
+src/target
+__pycache__
+data.csv

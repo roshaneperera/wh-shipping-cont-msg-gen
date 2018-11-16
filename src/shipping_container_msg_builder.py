@@ -3,14 +3,18 @@ import uuid
 import xml.etree.ElementTree as ET
 from time import strftime, gmtime
 
+from util import ContainerMsgType
 from work_inst_tag_builder import WorkInstructionMsgBuilder
 from xml_definitions import XMLDefinitions
 
 
 class ShippingContainerRequestBuilder:
 
-    def __init__(self):
-        self.shippingContainerXML = ET.fromstring(XMLDefinitions.shippingContainerXML)
+    def __init__(self, msg_type):
+        if msg_type == ContainerMsgType.MOPT:
+            self.shippingContainerXML = ET.fromstring(XMLDefinitions.shippingContainerMOPTXML)
+        else:
+            self.shippingContainerXML = ET.fromstring(XMLDefinitions.shippingContainerSOPTXML)
 
     @staticmethod
     def gen_scale_event_date():

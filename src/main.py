@@ -3,7 +3,7 @@ import csv
 import os
 import shutil
 import xml.etree.ElementTree as ET
-from util import BgColors
+from util import BgColors, ContainerMsgType
 from shipping_container_msg_builder import ShippingContainerRequestBuilder
 
 output_dir = './target/%s'
@@ -38,11 +38,10 @@ def initialize():
     os.mkdir('./target')
 
 
-def generate_shipping_container_msgs(data_list):
+def generate_shipping_container_msgs(data_list, msg_type):
     for data in data_list:
-        builder = ShippingContainerRequestBuilder()
+        builder = ShippingContainerRequestBuilder(msg_type)
         element = builder.build(data)
-        # result = ET.tostring(element=element, encoding="unicode", method="xml", short_empty_elements=False)
         file_name = (file_name_prefix % data[0])
         destination_file = output_dir % file_name
         ET.ElementTree(element) \
@@ -58,4 +57,8 @@ if __name__ == '__main__':
     args = parser.parse_args()
     fileLocation = args.location[0]
     print('loading data from ', BgColors.UNDERLINE + BgColors.BOLD, fileLocation, BgColors.ENDC)
-    generate_shipping_container_msgs(load_csv_data(fileLocation))
+    # msg_type = ContainerMsgType.SOPT
+    msg_type = ContainerMsgType.MOPT
+    generate_shipping_container_msgs(load_csv_data(fileLocation), msg_type)
+
+# TODO MOPT msg builder

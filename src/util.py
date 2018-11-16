@@ -1,3 +1,6 @@
+from enum import Enum
+
+
 class BgColors:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
@@ -7,3 +10,8 @@ class BgColors:
     ENDC = '\033[0m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
+
+
+class ContainerMsgType(Enum):
+    SOPT = 1
+    MOPT = 2
