@@ -58,11 +58,12 @@ if __name__ == '__main__':
     initialize()
     args = parser.parse_args()
     fileLocation = args.location[0]
-    print('loading data from ', BgColors.UNDERLINE + BgColors.BOLD, fileLocation, BgColors.ENDC)Å
+    print('loading data from ', BgColors.UNDERLINE + BgColors.BOLD, fileLocation, BgColors.ENDC)
     # msg_type = ContainerMsgType.SOPT
     msg_type = ContainerMsgType.MOPT
     generated_msg = generate_shipping_container_msgs(load_csv_data(fileLocation), msg_type)
 
     client = RabbitClient("localhost", 15672, 'item-master-exchange-item-updated', 'guest', 'guest')
     # un-comment to publish the message to the queue
+    # client = RabbitClient("1.queue.service.redmart", 15672, 'item-master-exchange-item-updated', 'guest', 'guest')
     client.publish_message('item-master-wh-item-data', generated_msg)
